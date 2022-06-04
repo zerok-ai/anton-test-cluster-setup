@@ -25,7 +25,7 @@
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
   "id": 27,
-  "iteration": 1654333779276,
+  "iteration": 1654355017453,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -48,7 +48,7 @@
       },
       "hiddenSeries": false,
       "id": 26,
-      "interval": "1m",
+      "interval": "15s",
       "legend": {
         "alignAsTable": true,
         "avg": false,
@@ -63,6 +63,7 @@
       "lines": true,
       "linewidth": 0,
       "links": [],
+      "maxDataPoints": 1221,
       "nullPointMode": "null as zero",
       "options": {
         "alertThreshold": true
@@ -74,6 +75,7 @@
       "renderer": "flot",
       "seriesOverrides": [
         {
+          "$$hashKey": "object:2170",
           "alias": "requests",
           "color": "#F2495C",
           "fill": 0,
@@ -83,6 +85,7 @@
           "stack": false
         },
         {
+          "$$hashKey": "object:2171",
           "alias": "limits",
           "color": "#FF9830",
           "fill": 0,
@@ -101,13 +104,14 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "editorMode": "builder",
-          "expr": "sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate{namespace=\"$namespace\", container!=\"POD\", cluster=\"$cluster\", pod=~\"$pod\"}) * 1000",
+          "editorMode": "code",
+          "expr": "sum(label_replace(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate{pod=~\"$deployment-\\\\w+-\\\\w+$\"}, \"pod_set\", \"$1\", \"pod\", \"(.*)-\\\\w+-\\\\w+$\")) by (pod_set) * 1000",
           "format": "time_series",
+          "hide": false,
           "intervalFactor": 2,
-          "legendFormat": "{{label}}",
+          "legendFormat": "{{pod}}",
           "range": true,
-          "refId": "Highload",
+          "refId": "A",
           "step": 10
         },
         {
@@ -115,8 +119,9 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(\n    kube_pod_container_resource_requests{job=\"kube-state-metrics\", cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"$pod\", resource=\"cpu\"}\n) * 1000\n",
+          "expr": "sum(kube_pod_container_resource_requests{job=\"kube-state-metrics\", cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"$deployment-\\\\w+-\\\\w+$\", resource=\"cpu\"}) * 1000\n",
           "format": "time_series",
+          "hide": false,
           "intervalFactor": 2,
           "legendFormat": "requests",
           "refId": "B",
@@ -127,8 +132,9 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(\n    kube_pod_container_resource_limits{job=\"kube-state-metrics\", cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"$pod\", resource=\"cpu\"}\n) * 1000\n",
+          "expr": "sum(\n    kube_pod_container_resource_limits{job=\"kube-state-metrics\", cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"$deployment-\\\\w+-\\\\w+$\", resource=\"cpu\"}\n) * 1000\n",
           "format": "time_series",
+          "hide": false,
           "intervalFactor": 2,
           "legendFormat": "limits",
           "refId": "C",
@@ -187,7 +193,7 @@
       },
       "hiddenSeries": false,
       "id": 32,
-      "interval": "1m",
+      "interval": "15s",
       "legend": {
         "alignAsTable": true,
         "avg": false,
@@ -213,6 +219,7 @@
       "renderer": "flot",
       "seriesOverrides": [
         {
+          "$$hashKey": "object:2285",
           "alias": "requests",
           "color": "#F2495C",
           "dashes": true,
@@ -223,6 +230,7 @@
           "stack": false
         },
         {
+          "$$hashKey": "object:2286",
           "alias": "limits",
           "color": "#FF9830",
           "dashes": true,
@@ -242,10 +250,13 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(container_memory_working_set_bytes{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"$pod\", container!=\"POD\", image!=\"\"}) by (container)",
+          "editorMode": "code",
+          "expr": "sum(label_replace(container_memory_working_set_bytes{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"$deployment-\\\\w+-\\\\w+$\", container!=\"POD\", image!=\"\"}, \"pod_set\", \"$1\", \"pod\", \"(.*)-\\\\w+-\\\\w+$\")) by (pod_set)",
           "format": "time_series",
+          "hide": false,
           "intervalFactor": 2,
           "legendFormat": "{{container}}",
+          "range": true,
           "refId": "A",
           "step": 10
         },
@@ -254,7 +265,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(\n    kube_pod_container_resource_requests{job=\"kube-state-metrics\", cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"$pod\", resource=\"memory\"}\n)\n",
+          "expr": "sum(\n    kube_pod_container_resource_requests{job=\"kube-state-metrics\", cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"$deployment-\\\\w+-\\\\w+$\", resource=\"memory\"}\n)\n",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "requests",
@@ -266,7 +277,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(\n    kube_pod_container_resource_limits{job=\"kube-state-metrics\", cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"$pod\", resource=\"memory\"}\n)\n",
+          "expr": "sum(\n    kube_pod_container_resource_limits{job=\"kube-state-metrics\", cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"$deployment-\\\\w+-\\\\w+$\", resource=\"memory\"}\n)\n",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "limits",
@@ -320,13 +331,13 @@
       "fill": 1,
       "fontSize": "100%",
       "gridPos": {
-        "h": 3,
+        "h": 4,
         "w": 24,
         "x": 0,
         "y": 7
       },
       "id": 30,
-      "interval": "1m",
+      "interval": "15s",
       "legend": {
         "alignAsTable": true,
         "avg": false,
@@ -357,6 +368,7 @@
       "steppedLine": false,
       "styles": [
         {
+          "$$hashKey": "object:2247",
           "alias": "Time",
           "align": "auto",
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
@@ -364,6 +376,7 @@
           "type": "hidden"
         },
         {
+          "$$hashKey": "object:2248",
           "alias": "CPU Usage",
           "align": "auto",
           "colors": [],
@@ -379,6 +392,7 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:2249",
           "alias": "CPU Requests",
           "align": "auto",
           "colors": [],
@@ -394,6 +408,7 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:2250",
           "alias": "CPU Requests %",
           "align": "auto",
           "colors": [],
@@ -409,6 +424,7 @@
           "unit": "percentunit"
         },
         {
+          "$$hashKey": "object:2251",
           "alias": "CPU Limits",
           "align": "auto",
           "colors": [],
@@ -424,6 +440,7 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:2252",
           "alias": "CPU Limits %",
           "align": "auto",
           "colors": [],
@@ -439,6 +456,7 @@
           "unit": "percentunit"
         },
         {
+          "$$hashKey": "object:2253",
           "alias": "Container",
           "align": "auto",
           "colors": [],
@@ -454,6 +472,24 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:2446",
+          "alias": "Replicas",
+          "align": "auto",
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "mappingType": 1,
+          "pattern": "Value #F",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "$$hashKey": "object:2254",
           "alias": "",
           "align": "auto",
           "colors": [],
@@ -471,7 +507,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate{cluster=\"$cluster\", namespace=\"$namespace\", container!=\"POD\", pod=~\"$pod\"}) by (container)",
+          "expr": "sum(label_replace(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate{cluster=\"$cluster\", namespace=\"$namespace\", container!=\"POD\", pod=~\"$deployment-\\\\w+-\\\\w+$\"}, \"pod_set\", \"$1\", \"pod\", \"(.*)-\\\\w+-\\\\w+$\")) by (pod_set) * 1000",
           "format": "table",
           "instant": true,
           "intervalFactor": 2,
@@ -484,7 +520,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(cluster:namespace:pod_cpu:active:kube_pod_container_resource_requests{cluster=\"$cluster\", namespace=\"$namespace\", pod=\"$pod\"}) by (container) *1000",
+          "expr": "sum(label_replace(cluster:namespace:pod_cpu:active:kube_pod_container_resource_requests{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"$deployment-\\\\w+-\\\\w+$\"}, \"pod_set\", \"$1\", \"pod\", \"(.*)-\\\\w+-\\\\w+$\")) by (pod_set) *1000",
           "format": "table",
           "instant": true,
           "intervalFactor": 2,
@@ -497,7 +533,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate{cluster=\"$cluster\", namespace=\"$namespace\", pod=\"$pod\"}) by (container) / sum(cluster:namespace:pod_cpu:active:kube_pod_container_resource_requests{cluster=\"$cluster\", namespace=\"$namespace\", pod=\"$pod\"}) by (container)",
+          "expr": "sum(label_replace(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"$deployment-\\\\w+-\\\\w+$\"}, \"pod_set\", \"$1\", \"pod\", \"(.*)-\\\\w+-\\\\w+$\")) by (pod_set) / sum(label_replace(cluster:namespace:pod_cpu:active:kube_pod_container_resource_requests{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"$deployment-\\\\w+-\\\\w+$\"}, \"pod_set\", \"$1\", \"pod\", \"(.*)-\\\\w+-\\\\w+$\")) by (pod_set)",
           "format": "table",
           "instant": true,
           "intervalFactor": 2,
@@ -510,7 +546,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(cluster:namespace:pod_cpu:active:kube_pod_container_resource_limits{cluster=\"$cluster\", namespace=\"$namespace\", pod=\"$pod\"}) by (container) *1000",
+          "expr": "sum(label_replace(cluster:namespace:pod_cpu:active:kube_pod_container_resource_limits{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"$deployment-\\\\w+-\\\\w+$\"}, \"pod_set\", \"$1\", \"pod\", \"(.*)-\\\\w+-\\\\w+$\")) by (pod_set) *1000",
           "format": "table",
           "instant": true,
           "intervalFactor": 2,
@@ -523,13 +559,27 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate{cluster=\"$cluster\", namespace=\"$namespace\", pod=\"$pod\"}) by (container) / sum(cluster:namespace:pod_cpu:active:kube_pod_container_resource_limits{cluster=\"$cluster\", namespace=\"$namespace\", pod=\"$pod\"}) by (container)",
+          "expr": "sum(label_replace(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"$deployment-\\\\w+-\\\\w+$\"}, \"pod_set\", \"$1\", \"pod\", \"(.*)-\\\\w+-\\\\w+$\")) by (pod_set) / sum(label_replace(cluster:namespace:pod_cpu:active:kube_pod_container_resource_limits{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"$deployment-\\\\w+-\\\\w+$\"}, \"pod_set\", \"$1\", \"pod\", \"(.*)-\\\\w+-\\\\w+$\")) by (pod_set)",
           "format": "table",
           "instant": true,
           "intervalFactor": 2,
           "legendFormat": "",
           "refId": "E",
           "step": 10
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "$datasource"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "count(label_replace(kube_pod_info{namespace=~\"$namespace\", pod=~\"$deployment-\\\\w+-\\\\w+$\"}, \"pod_set\", \"$1\", \"pod\", \"(.*)-\\\\w+-\\\\w+$\")) by (pod_set)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "range": false,
+          "refId": "F"
         }
       ],
       "thresholds": [],
@@ -573,13 +623,13 @@
       "fill": 1,
       "fontSize": "100%",
       "gridPos": {
-        "h": 4,
+        "h": 5,
         "w": 24,
         "x": 0,
-        "y": 10
+        "y": 11
       },
       "id": 34,
-      "interval": "1m",
+      "interval": "15s",
       "legend": {
         "alignAsTable": true,
         "avg": false,
@@ -602,7 +652,7 @@
       "seriesOverrides": [],
       "showHeader": true,
       "sort": {
-        "col": 0,
+        "col": 10,
         "desc": true
       },
       "spaceLength": 10,
@@ -610,6 +660,7 @@
       "steppedLine": false,
       "styles": [
         {
+          "$$hashKey": "object:415",
           "alias": "Time",
           "align": "auto",
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
@@ -617,6 +668,7 @@
           "type": "hidden"
         },
         {
+          "$$hashKey": "object:416",
           "alias": "Memory Usage (WSS)",
           "align": "auto",
           "colors": [],
@@ -632,6 +684,7 @@
           "unit": "bytes"
         },
         {
+          "$$hashKey": "object:417",
           "alias": "Memory Requests",
           "align": "auto",
           "colors": [],
@@ -647,6 +700,7 @@
           "unit": "bytes"
         },
         {
+          "$$hashKey": "object:418",
           "alias": "Memory Requests %",
           "align": "auto",
           "colors": [],
@@ -662,6 +716,7 @@
           "unit": "percentunit"
         },
         {
+          "$$hashKey": "object:419",
           "alias": "Memory Limits",
           "align": "auto",
           "colors": [],
@@ -677,6 +732,7 @@
           "unit": "bytes"
         },
         {
+          "$$hashKey": "object:420",
           "alias": "Memory Limits %",
           "align": "auto",
           "colors": [],
@@ -692,6 +748,7 @@
           "unit": "percentunit"
         },
         {
+          "$$hashKey": "object:421",
           "alias": "Memory Usage (RSS)",
           "align": "auto",
           "colors": [],
@@ -707,6 +764,7 @@
           "unit": "bytes"
         },
         {
+          "$$hashKey": "object:422",
           "alias": "Memory Usage (Cache)",
           "align": "auto",
           "colors": [],
@@ -722,6 +780,7 @@
           "unit": "bytes"
         },
         {
+          "$$hashKey": "object:423",
           "alias": "Memory Usage (Swap)",
           "align": "auto",
           "colors": [],
@@ -737,6 +796,7 @@
           "unit": "bytes"
         },
         {
+          "$$hashKey": "object:424",
           "alias": "Container",
           "align": "auto",
           "colors": [],
@@ -752,6 +812,24 @@
           "unit": "short"
         },
         {
+          "$$hashKey": "object:570",
+          "alias": "Replicas",
+          "align": "auto",
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "mappingType": 1,
+          "pattern": "Value #I",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "$$hashKey": "object:425",
           "alias": "",
           "align": "auto",
           "colors": [],
@@ -769,7 +847,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(container_memory_working_set_bytes{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"$pod\", container!=\"POD\", image!=\"\"}) by (container)",
+          "expr": "sum(label_replace(container_memory_working_set_bytes{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"$deployment-\\\\w+-\\\\w+$\", container!=\"POD\", image!=\"\"}, \"pod_set\", \"$1\", \"pod\", \"(.*)-\\\\w+-\\\\w+$\")) by (pod_set)",
           "format": "table",
           "instant": true,
           "intervalFactor": 2,
@@ -782,7 +860,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(cluster:namespace:pod_memory:active:kube_pod_container_resource_requests{cluster=\"$cluster\", namespace=\"$namespace\", pod=\"$pod\"}) by (container)",
+          "expr": "sum(label_replace(cluster:namespace:pod_memory:active:kube_pod_container_resource_requests{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"$deployment-\\\\w+-\\\\w+$\"}, \"pod_set\", \"$1\", \"pod\", \"(.*)-\\\\w+-\\\\w+$\")) by (pod_set)",
           "format": "table",
           "instant": true,
           "intervalFactor": 2,
@@ -795,7 +873,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(container_memory_working_set_bytes{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", cluster=\"$cluster\", namespace=\"$namespace\", pod=\"$pod\", image!=\"\"}) by (container) / sum(cluster:namespace:pod_memory:active:kube_pod_container_resource_requests{cluster=\"$cluster\", namespace=\"$namespace\", pod=\"$pod\"}) by (container)",
+          "expr": "sum(label_replace(container_memory_working_set_bytes{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"$deployment-\\\\w+-\\\\w+$\", image!=\"\"}, \"pod_set\", \"$1\", \"pod\", \"(.*)-\\\\w+-\\\\w+$\")) by (pod_set) / sum(label_replace(cluster:namespace:pod_memory:active:kube_pod_container_resource_requests{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"$deployment-\\\\w+-\\\\w+$\"}, \"pod_set\", \"$1\", \"pod\", \"(.*)-\\\\w+-\\\\w+$\")) by (pod_set)",
           "format": "table",
           "instant": true,
           "intervalFactor": 2,
@@ -808,7 +886,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(cluster:namespace:pod_memory:active:kube_pod_container_resource_limits{cluster=\"$cluster\", namespace=\"$namespace\", pod=\"$pod\"}) by (container)",
+          "expr": "sum(label_replace(cluster:namespace:pod_memory:active:kube_pod_container_resource_limits{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"$deployment-\\\\w+-\\\\w+$\"}, \"pod_set\", \"$1\", \"pod\", \"(.*)-\\\\w+-\\\\w+$\")) by (pod_set)",
           "format": "table",
           "instant": true,
           "intervalFactor": 2,
@@ -821,7 +899,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(container_memory_working_set_bytes{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", cluster=\"$cluster\", namespace=\"$namespace\", pod=\"$pod\", container!=\"\", image!=\"\"}) by (container) / sum(cluster:namespace:pod_memory:active:kube_pod_container_resource_limits{cluster=\"$cluster\", namespace=\"$namespace\", pod=\"$pod\"}) by (container)",
+          "expr": "sum(label_replace(container_memory_working_set_bytes{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"$deployment-\\\\w+-\\\\w+$\", container!=\"\", image!=\"\"}, \"pod_set\", \"$1\", \"pod\", \"(.*)-\\\\w+-\\\\w+$\")) by (pod_set) / sum(label_replace(cluster:namespace:pod_memory:active:kube_pod_container_resource_limits{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"$deployment-\\\\w+-\\\\w+$\"}, \"pod_set\", \"$1\", \"pod\", \"(.*)-\\\\w+-\\\\w+$\")) by (pod_set)",
           "format": "table",
           "instant": true,
           "intervalFactor": 2,
@@ -834,7 +912,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(container_memory_rss{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", cluster=\"$cluster\", namespace=\"$namespace\", pod=\"$pod\", container != \"\", container != \"POD\"}) by (container)",
+          "expr": "sum(label_replace(container_memory_rss{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"$deployment-\\\\w+-\\\\w+$\", container != \"\", container != \"POD\"}, \"pod_set\", \"$1\", \"pod\", \"(.*)-\\\\w+-\\\\w+$\")) by (pod_set)",
           "format": "table",
           "instant": true,
           "intervalFactor": 2,
@@ -847,7 +925,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(container_memory_cache{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", cluster=\"$cluster\", namespace=\"$namespace\", pod=\"$pod\", container != \"\", container != \"POD\"}) by (container)",
+          "expr": "sum(label_replace(container_memory_cache{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"$deployment-\\\\w+-\\\\w+$\", container != \"\", container != \"POD\"}, \"pod_set\", \"$1\", \"pod\", \"(.*)-\\\\w+-\\\\w+$\")) by (pod_set)",
           "format": "table",
           "instant": true,
           "intervalFactor": 2,
@@ -860,13 +938,28 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(container_memory_swap{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", cluster=\"$cluster\", namespace=\"$namespace\", pod=\"$pod\", container != \"\", container != \"POD\"}) by (container)",
+          "expr": "sum(label_replace(container_memory_swap{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"$deployment-\\\\w+-\\\\w+$\", container != \"\", container != \"POD\"}, \"pod_set\", \"$1\", \"pod\", \"(.*)-\\\\w+-\\\\w+$\")) by (pod_set)",
           "format": "table",
           "instant": true,
           "intervalFactor": 2,
           "legendFormat": "",
           "refId": "H",
           "step": 10
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "$datasource"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "count(label_replace(kube_pod_info{namespace=~\"$namespace\", pod=~\"$deployment-\\\\w+-\\\\w+$\"}, \"pod_set\", \"$1\", \"pod\", \"(.*)-\\\\w+-\\\\w+$\")) by (pod_set)",
+          "format": "table",
+          "hide": true,
+          "instant": true,
+          "legendFormat": "Pod Count",
+          "range": false,
+          "refId": "I"
         }
       ],
       "thresholds": [],
@@ -903,6 +996,7 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": {
+        "type": "prometheus",
         "uid": "$datasource"
       },
       "fill": 10,
@@ -911,7 +1005,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 14
+        "y": 16
       },
       "hiddenSeries": false,
       "id": 38,
@@ -945,7 +1039,11 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(irate(container_network_transmit_bytes_total{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"$pod\"}[$__rate_interval])) by (pod)",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "sum(irate(container_network_transmit_bytes_total{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", cluster=\"$cluster\", namespace=\"$namespace\"}[$__rate_interval])) by (pod)",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{pod}}",
@@ -969,12 +1067,14 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:1811",
           "format": "Bps",
           "logBase": 1,
           "min": 0,
           "show": true
         },
         {
+          "$$hashKey": "object:1812",
           "format": "short",
           "logBase": 1,
           "show": false
@@ -990,6 +1090,7 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": {
+        "type": "prometheus",
         "uid": "$datasource"
       },
       "fill": 10,
@@ -998,7 +1099,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 14
+        "y": 16
       },
       "hiddenSeries": false,
       "id": 36,
@@ -1032,7 +1133,11 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(irate(container_network_receive_bytes_total{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"$pod\"}[$__rate_interval])) by (pod)",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "sum(irate(container_network_receive_bytes_total{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", cluster=\"$cluster\", namespace=\"$namespace\"}[$__rate_interval])) by (pod)",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{pod}}",
@@ -1056,12 +1161,14 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:1885",
           "format": "Bps",
           "logBase": 1,
           "min": 0,
           "show": true
         },
         {
+          "$$hashKey": "object:1886",
           "format": "short",
           "logBase": 1,
           "show": false
@@ -1130,7 +1237,7 @@
         "h": 8,
         "w": 6,
         "x": 0,
-        "y": 21
+        "y": 23
       },
       "id": 21,
       "options": {
@@ -1150,7 +1257,10 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
+          "editorMode": "code",
           "expr": "k6_iterations{}",
+          "legendFormat": "{{scenario}}",
+          "range": true,
           "refId": "A"
         }
       ],
@@ -1217,7 +1327,7 @@
         "h": 8,
         "w": 6,
         "x": 6,
-        "y": 21
+        "y": 23
       },
       "id": 15,
       "options": {
@@ -1261,7 +1371,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 21
+        "y": 23
       },
       "hiddenSeries": false,
       "id": 28,
@@ -1404,7 +1514,7 @@
         "h": 8,
         "w": 6,
         "x": 0,
-        "y": 29
+        "y": 31
       },
       "id": 7,
       "options": {
@@ -1424,12 +1534,36 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "editorMode": "builder",
-          "expr": "sum by(scenario, expected_response) (k6_http_req_duration_avg)",
+          "editorMode": "code",
+          "expr": "avg(k6_http_req_duration_avg)",
           "hide": false,
-          "legendFormat": "{{scenario}} - {{expected_response}}",
+          "legendFormat": "Service  (Avg)",
           "range": true,
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "builder",
+          "expr": "sum by(scenario, expected_response) (k6_custom_highcpu_duration_avg)",
+          "hide": false,
+          "legendFormat": "{{scenario}}",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sum by(scenario, expected_response) (k6_custom_highmem_duration_avg)",
+          "hide": false,
+          "legendFormat": "{{scenario}}",
+          "range": true,
+          "refId": "C"
         }
       ],
       "title": "Request - time",
@@ -1494,7 +1628,7 @@
         "h": 8,
         "w": 6,
         "x": 6,
-        "y": 29
+        "y": 31
       },
       "id": 17,
       "options": {
@@ -1599,7 +1733,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 29
+        "y": 31
       },
       "id": 5,
       "options": {
@@ -1651,7 +1785,7 @@
     "list": [
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "Prometheus",
           "value": "Prometheus"
         },
@@ -1723,7 +1857,33 @@
       },
       {
         "current": {
-          "selected": true,
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "definition": "label_values(kube_deployment_labels{namespace=\"$namespace\"}, deployment)",
+        "hide": 0,
+        "includeAll": true,
+        "multi": false,
+        "name": "deployment",
+        "options": [],
+        "query": {
+          "query": "label_values(kube_deployment_labels{namespace=\"$namespace\"}, deployment)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": false,
           "text": "All",
           "value": "$__all"
         },
@@ -1732,7 +1892,7 @@
           "uid": "${datasource}"
         },
         "definition": "label_values(kube_pod_info{job=\"kube-state-metrics\", cluster=\"$cluster\", namespace=\"$namespace\"}, pod)",
-        "hide": 0,
+        "hide": 2,
         "includeAll": true,
         "multi": false,
         "name": "pod",
@@ -1750,8 +1910,8 @@
     ]
   },
   "time": {
-    "from": "now-6h",
-    "to": "now-1m"
+    "from": "now-15m",
+    "to": "now-1s"
   },
   "timepicker": {
     "nowDelay": "1m"
@@ -1759,6 +1919,6 @@
   "timezone": "",
   "title": "Load-test Data",
   "uid": "uEWfFXX7k",
-  "version": 28,
+  "version": 69,
   "weekStart": ""
 }
