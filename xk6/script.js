@@ -47,21 +47,21 @@ const scenarioMetrics = ['waiting', 'duration']
 
 /* End scenario specs */
 
-const customCounter = new Counter(    {
-  name: 'k6_test_setup',
-  help: 'K6s Test status',
-  labelNames: ['code']
-});
+// const customCounter = new Counter(    {
+//   name: 'k6_test_setup',
+//   help: 'K6s Test status',
+//   labelNames: ['code']
+// });
 
-export function setup() {
-  // 2. setup code
-  customCounter.inc(verticalScaleCount);
-}
+// export function setup() {
+//   // 2. setup code
+//   customCounter.inc(verticalScaleCount);
+// }
 
-export function teardown(data) {
-  // 4. teardown code
-  customCounter.dec(verticalScaleCount);
-}
+// export function teardown(data) {
+//   // 4. teardown code
+//   customCounter.dec(verticalScaleCount);
+// }
 
 var myTrend = {};
 
