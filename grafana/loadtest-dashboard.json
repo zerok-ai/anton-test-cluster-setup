@@ -38,8 +38,8 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
-  "id": 27,
-  "iteration": 1654497436160,
+  "id": 29,
+  "iteration": 1654572843895,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -1645,8 +1645,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1951,15 +1950,15 @@
     ]
   },
   "time": {
-    "from": "now-30m",
-    "to": "now-1s"
+    "from": "now-15m",
+    "to": "now"
   },
   "timepicker": {
-    "nowDelay": "1m"
+    "nowDelay": ""
   },
   "timezone": "",
   "title": "Load-test Data",
   "uid": "uEWfFXX7k",
-  "version": 9,
+  "version": 3,
   "weekStart": ""
 }
