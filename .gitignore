@@ -1,2 +1,3 @@
 eks/application/high-load/highload-ingress.yaml
+eks/application/anton/highload-ingress.yaml
 package-lock.json

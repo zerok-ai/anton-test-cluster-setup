@@ -1,7 +1,7 @@
 import { check } from 'k6';
 import http from 'k6/http';
 import { sleep } from 'k6';
-import { Trend } from 'k6/metrics';
+import { Counter, Trend } from 'k6/metrics';
 
 /* scenario specs */
 const preallocVUs = 1200;
@@ -46,6 +46,23 @@ const verticalScaleCount = {
 const scenarioMetrics = ['waiting', 'duration']
 
 /* End scenario specs */
+
+const customCounter = new Counter(    {
+  name: 'k6_test_setup',
+  help: 'K6s Test status',
+  labelNames: ['code']
+});
+
+export function setup() {
+  // 2. setup code
+  customCounter.inc(verticalScaleCount);
+}
+
+export function teardown(data) {
+  // 4. teardown code
+  customCounter.dec(verticalScaleCount);
+}
+
 var myTrend = {};
 
 function generateScenarioObj(scenarioName) {
@@ -98,7 +115,7 @@ const hostname = __ENV.MY_HOSTNAME;
 
 function prepareExecFn(scenarioName) {
   return () => {
-    const res = http.get('http://'+hostname+'/'+scenarioName+'?count='+verticalScaleCount[scenarioName]);
+    const res = http.get('http://'+hostname+'/app/'+scenarioName+'?count='+verticalScaleCount[scenarioName]);
     check(res, {
       'verify homepage text': (r) =>
         r.body.includes(scenarioName),
