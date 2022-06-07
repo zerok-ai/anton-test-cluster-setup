@@ -2,12 +2,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: load-test-deployment
-  namespace: load-test
   labels:
     app: myapp
     dep: default
 spec:
-  replicas: 1
+  replicas: 4
   selector:
     matchLabels:
       app: myapp

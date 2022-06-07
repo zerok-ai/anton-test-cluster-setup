@@ -2,7 +2,6 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: load-test-highload-service-monitor
-  namespace: load-test
   labels:
     app: myapp
     load: high

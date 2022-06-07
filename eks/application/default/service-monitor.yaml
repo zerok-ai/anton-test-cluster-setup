@@ -2,18 +2,14 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: load-test-service-monitor
-  namespace: load-test
   labels:
     app: myapp
-    load: any
 spec:
   selector:
     matchLabels:
       app: myapp
-      load: any
   endpoints:
   - port: m-http
     path: /metrics
   namespaceSelector:
-    matchNames:
-      - app
+    any: true

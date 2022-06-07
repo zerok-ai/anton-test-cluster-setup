@@ -1,6 +1,10 @@
 resources:
   - namespace.yaml
   - deployment.yaml
-  - services.yaml
+  - service.yaml
   - service-monitor.yaml
   - ingress.yaml
+commonLabels:
+  app: myapp
+  dep: default
+namespace: load-test

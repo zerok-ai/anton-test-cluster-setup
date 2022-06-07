@@ -26,12 +26,12 @@ cd default
 cd ..
 
 # setup Anton
-if [ $setup_mode = 'anton' ]; then
-    kubectl scale deployment/load-test --namespace app --replicas=2
-    cd anton
-    ./install.sh
-    cd ..
-fi;
+# if [ $setup_mode = 'anton' ]; then
+#     kubectl scale deployment/load-test --namespace app --replicas=2
+#     cd anton
+#     ./install.sh
+#     cd ..
+# fi;
 
 #Summary
 echo

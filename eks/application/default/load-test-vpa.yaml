@@ -1,7 +1,6 @@
 apiVersion: "autoscaling.k8s.io/v1"
 kind: VerticalPodAutoscaler
 metadata:
-  namespace: load-test
   labels:
     app: myapp
   name: load-test
