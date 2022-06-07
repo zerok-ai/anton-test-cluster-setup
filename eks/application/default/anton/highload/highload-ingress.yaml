@@ -2,16 +2,16 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: webapp-ingress
-  namespace: app
+  namespace: load-test
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
     nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    # nginx.ingress.kubernetes.io/rewrite-target: /$1
 spec:
   rules:
     # change the IP address here
-  - host: <<ELB_HOSTNAME>>
+  - host: a5728c3df5e8a438791d3187cc5e8f65-1994633686.us-east-2.elb.amazonaws.com
     http:
       paths:
       - backend:
@@ -19,12 +19,12 @@ spec:
             name: load-test-service-highload
             port: 
               number: 80
-        path: /app(/|$)(highcpu)
+        path: /highcpu
         pathType: Prefix
       - backend:
           service:
             name: load-test-service
             port: 
               number: 80
-        path: /app(/|$)(.*)
+        path: /
         pathType: Prefix

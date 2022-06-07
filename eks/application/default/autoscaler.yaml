@@ -2,7 +2,7 @@ apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
   name: load-test-autoscaler
-  namespace: app
+  namespace: load-test
   labels:
     load: low
 spec:

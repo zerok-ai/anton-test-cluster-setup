@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: load-test
-  namespace: app
+  name: load-test-deployment
+  namespace: load-test
   labels:
-    app: load-test
-    load: any
+    app: myapp
+    dep: default
 spec:
-  replicas: 4
+  replicas: 1
   selector:
     matchLabels:
-      app: load-test
-      load: any
+      app: myapp
+      dep: default
   template:
     metadata:
       labels:
-        app: load-test
-        load: any
+        app: myapp
+        dep: default
     spec:
       nodeSelector: {
         role: worker

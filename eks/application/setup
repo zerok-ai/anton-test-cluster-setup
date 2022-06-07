@@ -11,7 +11,7 @@ fi
 
 ELB_HOSTNAME=$(kubectl get services --namespace ingress | grep 'app-ingress-ingress' | grep 'LoadBalancer' | awk '{print $4}')
 sed 's/<<ELB_HOSTNAME>>/'"$ELB_HOSTNAME"'/g' default/ingress-template.yaml > default/ingress.yaml
-sed 's/<<ELB_HOSTNAME>>/'"$ELB_HOSTNAME"'/g' anton/highload-ingress-template.yaml > anton/highload-ingress.yaml
+sed 's/<<ELB_HOSTNAME>>/'"$ELB_HOSTNAME"'/g' default/anton/highload-ingress-template.yaml > default/anton/highload-ingress.yaml
 
 # Do cleanup
 kubectl delete -f namespace.yaml --ignore-not-found=true

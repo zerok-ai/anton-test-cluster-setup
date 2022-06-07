@@ -2,14 +2,14 @@ apiVersion: v1
 kind: Service
 metadata:
   name: load-test-service
-  namespace: app
+  namespace: load-test
   labels:
-    app: load-test
-    load: any
+    app: myapp
+    dep: default
 spec:
   selector:
-    app: load-test
-    load: any
+    app: myapp
+    dep: default
   type: ClusterIP # LoadBalancer # NodePort # 
   ports:
     - protocol: TCP

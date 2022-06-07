@@ -2,14 +2,14 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: load-test-highload-service-monitor
-  namespace: app
+  namespace: load-test
   labels:
-    app: load-test
+    app: myapp
     load: high
 spec:
   selector:
     matchLabels:
-      app: load-test
+      app: myapp
       load: high
   endpoints:
   - port: m-http

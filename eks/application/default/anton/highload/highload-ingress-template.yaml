@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: webapp-ingress
-  namespace: app
+  namespace: load-test
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
@@ -16,8 +16,15 @@ spec:
       paths:
       - backend:
           service:
+            name: load-test-service-highload
+            port: 
+              number: 80
+        path: /app(/|$)(highcpu)
+        pathType: Prefix
+      - backend:
+          service:
             name: load-test-service
             port: 
               number: 80
-        path: /load-test(/|$)(.*)
+        path: /app(/|$)(.*)
         pathType: Prefix
