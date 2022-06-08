@@ -16,9 +16,19 @@ const highcpuCounter = new Counter({
     help: 'highcpu access counter',
     labelNames: ['code'],
 });
+const highcpu1Counter = new Counter({
+    name: 'highcpu1_counter',
+    help: 'highcpu1 access counter',
+    labelNames: ['code'],
+});
 const highmemCounter = new Counter({
     name: 'highmem_counter',
     help: 'highmem access counter',
+    labelNames: ['code'],
+});
+const highmem1Counter = new Counter({
+    name: 'highmem1_counter',
+    help: 'highmem1 access counter',
     labelNames: ['code'],
 });
 const lowloadCounter = new Counter({
