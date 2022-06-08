@@ -9,7 +9,6 @@ metadata:
     haproxy-ingress.github.io/maxconn-server: "500"
     haproxy-ingress.github.io/ssl-redirect: "false"
     haproxy-ingress.github.io/use-regex: "true"
-    haproxy-ingress.github.io/rewrite-target: /
 spec:
   rules:
     # change the IP address here
@@ -21,5 +20,5 @@ spec:
             name: load-test-service
             port: 
               number: 80
-        path: /app
+        path: /
         pathType: Prefix
