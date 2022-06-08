@@ -1,6 +1,8 @@
 #! /bin/bash
 
 setup_mode=$1  # default | anton | clean | help
+ingress=$2 
+
 if [ "$setup_mode" = 'default' -o "$setup_mode" = 'anton' -o "$setup_mode" = 'clean' ]; then
     echo "Setting up cluster for ${setup_mode}"
 else
@@ -9,9 +11,9 @@ else
     exit 0
 fi
 
-ELB_HOSTNAME=$(kubectl get services --namespace ingress | grep 'app-ingress-ingress' | grep 'LoadBalancer' | awk '{print $4}')
-sed 's/<<ELB_HOSTNAME>>/'"$ELB_HOSTNAME"'/g' default/ingress-template.yaml > default/ingress.yaml
-sed 's/<<ELB_HOSTNAME>>/'"$ELB_HOSTNAME"'/g' anton/highload-ingress-template.yaml > anton/highload-ingress.yaml
+ELB_HOSTNAME=$(kubectl get services --namespace ingress${ingress} | grep 'app-ingress'${ingress}'-ingress' | grep 'LoadBalancer' | awk '{print $4}')
+sed 's/<<ELB_HOSTNAME>>/'"$ELB_HOSTNAME"'/g' default/ingress${ingress}-template.yaml > default/ingress.yaml
+sed 's/<<ELB_HOSTNAME>>/'"$ELB_HOSTNAME"'/g' anton/highload-ingress${ingress}-template.yaml > anton/highload-ingress.yaml
 
 # Do cleanup
 kubectl delete -f namespace.yaml --ignore-not-found=true
@@ -36,7 +38,7 @@ fi;
 #Summary
 echo
 echo "${setup_mode} deployed at:"
-echo "http://"$ELB_HOSTNAME"/hc"
+echo "http://"$ELB_HOSTNAME"/app/hc"
 echo
 echo "Fetching Pod info: "
 kubectl get pods --namespace app --show-labels

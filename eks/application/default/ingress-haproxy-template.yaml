@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: webapp-ingress
+  namespace: app
+  annotations:
+    kubernetes.io/ingress.class: haproxy
+    haproxy-ingress.github.io/balance-algorithm: roundrobin
+    haproxy-ingress.github.io/maxconn-server: "500"
+    haproxy-ingress.github.io/ssl-redirect: "false"
+    haproxy-ingress.github.io/use-regex: "true"
+    haproxy-ingress.github.io/rewrite-target: /$2
+spec:
+  rules:
+    # change the IP address here
+  - host: <<ELB_HOSTNAME>>
+    http:
+      paths:
+      - backend:
+          service:
+            name: load-test-service
+            port: 
+              number: 80
+        path: /app(/|$)(.*)
+        pathType: Prefix
