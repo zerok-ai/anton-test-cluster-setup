@@ -22,12 +22,14 @@ public class HelloController {
     @ResponseBody
     public String highmemHandler(
             @RequestParam("count") Long count) {
-        return "highmem [" + time() + "] - " + highmemResponseGenerator(count);
+        Vector<Object> v = new Vector<Object>();
+        return "highmem [" + time() + "] - " + highmemResponseGenerator(v, count);
     }
 
     @RequestMapping("/highmem1")
     public String highmemHandler1(@RequestParam("count") Long count) {
-        return "highmem1 [" + time() + "] - " + highmemResponseGenerator(count);
+        Vector<Object> v = new Vector<Object>();
+        return "highmem1 [" + time() + "] - " + highmemResponseGenerator(v, count);
     }
 
     @RequestMapping("/highcpu")
@@ -61,11 +63,11 @@ public class HelloController {
         return sdf.format(resultdate);
     }
 
-    private String highmemResponseGenerator(long count) {
+    private String highmemResponseGenerator(Vector<Object> v, long count) {
+        
+        // count is in MBs. convert it to bytes
         long countInternal = count * 1024 * 1024;
-        Vector<Object> v = new Vector<Object>();
-        // Runtime rt = Runtime.getRuntime();
-        // System.out.println("free memory (pre): " + rt.freeMemory());
+        
         while (countInternal > 0) {
             if (countInternal > Integer.MAX_VALUE) {
                 v.add(new byte[Integer.MAX_VALUE]);
@@ -75,8 +77,6 @@ public class HelloController {
                 break;
             }
         }
-
-        // System.out.println("free memory (post): " + rt.freeMemory());
         return "Allocated " + count + " MB";
     }
 
