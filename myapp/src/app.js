@@ -11,7 +11,9 @@ var garbageCollectorRouter = require('./routes/garbageCollectorRouter');
 var lowloadRouter = require('./routes/lowload');
 var highloadRouter = require('./routes/highload');
 var highcpuRouter = require('./routes/highcpu');
+var highcpu1Router = require('./routes/highcpu1');
 var highmemRouter = require('./routes/highmem');
+var highmem1Router = require('./routes/highmem1');
 
 var app = express();
 
@@ -27,7 +29,9 @@ app.use('/gc', garbageCollectorRouter);
 app.use('/lowload', lowloadRouter);
 app.use('/highload', highloadRouter);
 app.use('/highcpu', highcpuRouter);
+app.use('/highcpu1', highcpu1Router);
 app.use('/highmem', highmemRouter);
+app.use('/highmem1', highmem1Router);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
