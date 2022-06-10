@@ -4,22 +4,23 @@ import { sleep } from 'k6';
 import { Counter, Trend } from 'k6/metrics';
 
 /* scenario specs */
-const preallocVUs = 1200;
-const maxVUs = 1200;
+const preallocVUs = 2000;
+const maxVUs = 2000;
 const timeUnit = '1m';
 
 const scenarioStages = {
-//
+/*/
   'highmem' : [
-    { duration: '1m', target: 1500 },
-    { duration: '3m', target: 1500 },
-    { duration: '30s', target: 1500 }  
+    { duration: '1m', target:  800 },
+    { duration: '3m', target:  800 },
+    { duration: '30s', target:  800 }  
   ],
 /*/
   'highcpu' : [
-    { duration: '1m', target: 1500 },
-    { duration: '3m', target: 1500 },
-    { duration: '30s', target: 1500 }  
+    { duration: '1m', target: 500 },
+    { duration: '2m', target: 1000 },
+    { duration: '2m', target: 1200 },
+    { duration: '4m', target: 1200 },
   ],
 /*/
   'highmem1' : [
@@ -29,11 +30,12 @@ const scenarioStages = {
   ],
 /*/
   'highcpu1' : [
-    { duration: '1m', target: 1500 },
-    { duration: '3m', target: 1500 },
-    { duration: '30s', target: 1500 }  
+    { duration: '1m', target: 500 },
+    { duration: '2m', target: 1000 },
+    { duration: '2m', target: 1200 },
+    { duration: '4m', target: 1200 },
   ],
-//	
+/*/	
   'highload' : [
     { duration: '1m', target: 10000 },
     { duration: '3m', target: 10000 },
@@ -81,15 +83,14 @@ var myTrend = {};
 
 function generateScenarioObj(scenarioName) {
   return {
-    executor: 'constant-arrival-rate',
+    executor: 'ramping-arrival-rate',
     exec: scenarioName,
     preAllocatedVUs: preallocVUs,
     timeUnit,
-    duration: '4m',
     maxVUs,
-    rate: scenarioStages[scenarioName][0].target,
-//    startRate: scenarioStages[scenarioName][0].target,
-//    stages: scenarioStages[scenarioName]
+    // rate: scenarioStages[scenarioName][0].target,
+    startRate: scenarioStages[scenarioName][0].target,
+    stages: scenarioStages[scenarioName]
   }
 }
 
