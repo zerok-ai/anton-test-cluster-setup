@@ -10,7 +10,7 @@ metadata:
 spec:
   rules:
     # change the IP address here
-  - host: a5728c3df5e8a438791d3187cc5e8f65-1994633686.us-east-2.elb.amazonaws.com
+  - host: a31c08db029fb4bfe8619350071d0c1b-15201050.us-east-2.elb.amazonaws.com
     http:
       paths:
       - backend:
