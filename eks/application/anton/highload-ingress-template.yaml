@@ -19,7 +19,7 @@ spec:
             name: load-test-service-highload
             port: 
               number: 80
-        path: /app(/|$)(highcpu)
+        path: /app(/|$)(highcpu1)
         pathType: Prefix
       - backend:
           service:
