@@ -42,6 +42,8 @@ module.exports = {
     highloadCounter,
     lowloadCounter,
     highmemCounter,
-    highcpuCounter
+    highcpuCounter,
+    highmem1Counter,
+    highcpu1Counter
 };
  
