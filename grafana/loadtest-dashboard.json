@@ -38,8 +38,8 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
-  "id": 29,
-  "iteration": 1654572843895,
+  "id": 27,
+  "iteration": 1654842066421,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -52,7 +52,7 @@
         "type": "prometheus",
         "uid": "$datasource"
       },
-      "fill": 10,
+      "fill": 8,
       "fillGradient": 0,
       "gridPos": {
         "h": 7,
@@ -159,7 +159,7 @@
       "timeRegions": [],
       "title": "CPU Usage",
       "tooltip": {
-        "shared": false,
+        "shared": true,
         "sort": 2,
         "value_type": "individual"
       },
@@ -197,7 +197,7 @@
         "type": "prometheus",
         "uid": "$datasource"
       },
-      "fill": 10,
+      "fill": 8,
       "fillGradient": 0,
       "gridPos": {
         "h": 7,
@@ -220,7 +220,7 @@
         "values": false
       },
       "lines": true,
-      "linewidth": 0,
+      "linewidth": 1,
       "links": [],
       "nullPointMode": "null as zero",
       "options": {
@@ -303,7 +303,7 @@
       "timeRegions": [],
       "title": "Memory Usage (WSS)",
       "tooltip": {
-        "shared": false,
+        "shared": true,
         "sort": 2,
         "value_type": "individual"
       },
@@ -1239,32 +1239,7 @@
             ]
           }
         },
-        "overrides": [
-          {
-            "__systemRef": "hideSeriesFrom",
-            "matcher": {
-              "id": "byNames",
-              "options": {
-                "mode": "exclude",
-                "names": [
-                  "Service  (Avg)"
-                ],
-                "prefix": "All except:",
-                "readOnly": true
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": true
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 8,

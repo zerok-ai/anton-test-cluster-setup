@@ -58,9 +58,10 @@ public class HelloController {
     }
 
     private String time() {
-        SimpleDateFormat sdf = new SimpleDateFormat("MMM dd,yyyy HH:mm");
-        Date resultdate = new Date(System.currentTimeMillis());
-        return sdf.format(resultdate);
+        SimpleDateFormat sdf = new SimpleDateFormat("MMM dd,yyyy HH:mm:ss");
+        long epoch = System.currentTimeMillis();
+        Date resultdate = new Date(epoch);
+        return sdf.format(resultdate) + "  epoch = " + epoch;
     }
 
     private String highmemResponseGenerator(Vector<Object> v, long count) {
