@@ -110,7 +110,7 @@ function generateScenarios() {
         myTrend[key] = myTrend[key] || {};
         myTrend[key][metric] = new Trend(`custom_${host}_${element}_${metric}`);
       })
-      module.exports[key] = prepareExecFn(element, hostname);
+      module.exports[key] = prepareExecFn(element, host);
       scenarios[key] = generateScenarioObj(element, host);
     });  
   });
@@ -138,7 +138,9 @@ export const options = {
 };
 
 
-function prepareExecFn(scenarioName, hostname) {
+function prepareExecFn(scenarioName, host) {
+  const hostname = hosts[host];
+  const key = `${host}_${scenarioName}`;
   return () => {
     const res = http.get('http://'+hostname+'/app/'+scenarioName+'?count='+verticalScaleCount[scenarioName]);
     check(res, {
@@ -146,7 +148,7 @@ function prepareExecFn(scenarioName, hostname) {
         r.body.includes(scenarioName),
     });
     scenarioMetrics.forEach((metric) => {
-    	myTrend[scenarioName][metric].add(res.timings[metric], {tag: `${scenarioName}_${metric}`});
+    	myTrend[key][metric].add(res.timings[metric], {tag: `${scenarioName}_${metric}`});
     })
     sleep(1);  
   }
