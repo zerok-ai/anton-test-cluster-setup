@@ -80,11 +80,17 @@ const scenarioMetrics = ['waiting', 'duration']
 // }
 
 var myTrend = {};
+const hostname_anton = __ENV.ANTON_HOSTNAME || 'with.getanton.com';
+const hostname_default = __ENV.DEFAULT_HOSTNAME || 'without.getanton.com';
+const hosts = {
+  anton: hostname_anton,
+  default: hostname_default
+};
 
-function generateScenarioObj(scenarioName) {
+function generateScenarioObj(scenarioName, hostname) {
   return {
     executor: 'ramping-arrival-rate',
-    exec: scenarioName,
+    exec: `${hostname}_${scenarioName}`,
     preAllocatedVUs: preallocVUs,
     timeUnit,
     maxVUs,
@@ -96,14 +102,19 @@ function generateScenarioObj(scenarioName) {
 
 function generateScenarios() {
   var scenarios = {};
-  Object.keys(scenarioStages).forEach(element => {
-    scenarioMetrics.forEach((metric) => {
-	myTrend[element] = myTrend[element] || {};
-    	myTrend[element][metric] = new Trend(`custom_${element}_${metric}`);
-    })
-    module.exports[element] = prepareExecFn(element);
-    scenarios[element] = generateScenarioObj(element);
+  Object.keys(hosts).forEach((host)=> {
+    const hostname = hosts[host];
+    Object.keys(scenarioStages).forEach(element => {
+      const key = `${host}_${element}`;
+      scenarioMetrics.forEach((metric) => {
+        myTrend[key] = myTrend[key] || {};
+        myTrend[key][metric] = new Trend(`custom_${host}_${element}_${metric}`);
+      })
+      module.exports[key] = prepareExecFn(element, hostname);
+      scenarios[key] = generateScenarioObj(element, host);
+    });  
   });
+  // console.log(scenarios);
   return scenarios;
 }
 
@@ -126,9 +137,8 @@ export const options = {
   },
 };
 
-const hostname = __ENV.MY_HOSTNAME;
 
-function prepareExecFn(scenarioName) {
+function prepareExecFn(scenarioName, hostname) {
   return () => {
     const res = http.get('http://'+hostname+'/app/'+scenarioName+'?count='+verticalScaleCount[scenarioName]);
     check(res, {
