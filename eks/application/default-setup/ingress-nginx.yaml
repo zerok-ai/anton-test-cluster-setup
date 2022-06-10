@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: webapp-ingress
+  name: ing
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
@@ -9,13 +9,12 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   rules:
-    # change the IP address here
-  - host: a31c08db029fb4bfe8619350071d0c1b-15201050.us-east-2.elb.amazonaws.com
+  - host: without.getanton.com
     http:
       paths:
       - backend:
           service:
-            name: load-test-service
+            name: svc
             port: 
               number: 80
         path: /load-test(/|$)(.*)

@@ -1,6 +1,6 @@
 - op: replace
   path: /metadata/name
-  value: load-test-hpa-highcpu
+  value: hpa-anton
 - op: replace
   path: /spec/scaleTargetRef/name
-  value: load-test-deployment-highcpu
+  value: dep-anton

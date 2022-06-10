@@ -3,12 +3,12 @@ kind: VerticalPodAutoscaler
 metadata:
   labels:
     app: myapp
-  name: load-test
+  name: vpa
 spec:
   targetRef:
     apiVersion: "apps/v1"
     kind: Deployment
-    name: load-test
+    name: dep
   resourcePolicy:
     containerPolicies:
       - containerName: '*'

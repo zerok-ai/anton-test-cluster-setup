@@ -1,0 +1,9 @@
+bases:
+  - ../language
+resources:
+  - ingress-nginx.yaml
+nameSuffix: -app
+namespace: base
+commonLabels:
+  app: myapp
+  dep: default  

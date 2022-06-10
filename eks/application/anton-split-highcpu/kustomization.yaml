@@ -1,0 +1,9 @@
+bases:
+  - ../anton-split
+patchesJson6902:
+  - target:
+      group: networking.k8s.io
+      version: v1
+      kind: Ingress
+      name: ing
+    path: ingress-patch.yaml
