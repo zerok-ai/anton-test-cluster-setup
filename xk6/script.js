@@ -4,22 +4,23 @@ import { sleep } from 'k6';
 import { Counter, Trend } from 'k6/metrics';
 
 /* scenario specs */
-const preallocVUs = 1200;
-const maxVUs = 1200;
+const preallocVUs = 2000;
+const maxVUs = 2000;
 const timeUnit = '1m';
 
 const scenarioStages = {
-//
+/*/
   'highmem' : [
-    { duration: '1m', target: 1500 },
-    { duration: '3m', target: 1500 },
-    { duration: '30s', target: 1500 }  
+    { duration: '1m', target:  800 },
+    { duration: '3m', target:  800 },
+    { duration: '30s', target:  800 }  
   ],
 /*/
   'highcpu' : [
-    { duration: '1m', target: 1500 },
-    { duration: '3m', target: 1500 },
-    { duration: '30s', target: 1500 }  
+    { duration: '1m', target: 500 },
+    { duration: '2m', target: 1000 },
+    { duration: '2m', target: 1200 },
+    { duration: '4m', target: 1200 },
   ],
 /*/
   'highmem1' : [
@@ -29,11 +30,12 @@ const scenarioStages = {
   ],
 /*/
   'highcpu1' : [
-    { duration: '1m', target: 1500 },
-    { duration: '3m', target: 1500 },
-    { duration: '30s', target: 1500 }  
+    { duration: '1m', target: 500 },
+    { duration: '2m', target: 1000 },
+    { duration: '2m', target: 1200 },
+    { duration: '4m', target: 1200 },
   ],
-//	
+/*/	
   'highload' : [
     { duration: '1m', target: 10000 },
     { duration: '3m', target: 10000 },
@@ -78,31 +80,41 @@ const scenarioMetrics = ['waiting', 'duration']
 // }
 
 var myTrend = {};
+const hostname_anton = __ENV.ANTON_HOSTNAME || 'with.getanton.com';
+const hostname_default = __ENV.DEFAULT_HOSTNAME || 'without.getanton.com';
+const hosts = {
+  anton: hostname_anton,
+  default: hostname_default
+};
 
-function generateScenarioObj(scenarioName) {
+function generateScenarioObj(scenarioName, hostname) {
   return {
-    executor: 'constant-arrival-rate',
-    exec: scenarioName,
+    executor: 'ramping-arrival-rate',
+    exec: `${hostname}_${scenarioName}`,
     preAllocatedVUs: preallocVUs,
     timeUnit,
-    duration: '4m',
     maxVUs,
-    rate: scenarioStages[scenarioName][0].target,
-//    startRate: scenarioStages[scenarioName][0].target,
-//    stages: scenarioStages[scenarioName]
+    // rate: scenarioStages[scenarioName][0].target,
+    startRate: scenarioStages[scenarioName][0].target,
+    stages: scenarioStages[scenarioName]
   }
 }
 
 function generateScenarios() {
   var scenarios = {};
-  Object.keys(scenarioStages).forEach(element => {
-    scenarioMetrics.forEach((metric) => {
-	myTrend[element] = myTrend[element] || {};
-    	myTrend[element][metric] = new Trend(`custom_${element}_${metric}`);
-    })
-    module.exports[element] = prepareExecFn(element);
-    scenarios[element] = generateScenarioObj(element);
+  Object.keys(hosts).forEach((host)=> {
+    const hostname = hosts[host];
+    Object.keys(scenarioStages).forEach(element => {
+      const key = `${host}_${element}`;
+      scenarioMetrics.forEach((metric) => {
+        myTrend[key] = myTrend[key] || {};
+        myTrend[key][metric] = new Trend(`custom_${host}_${element}_${metric}`);
+      })
+      module.exports[key] = prepareExecFn(element, host);
+      scenarios[key] = generateScenarioObj(element, host);
+    });  
   });
+  // console.log(scenarios);
   return scenarios;
 }
 
@@ -125,9 +137,10 @@ export const options = {
   },
 };
 
-const hostname = __ENV.MY_HOSTNAME;
 
-function prepareExecFn(scenarioName) {
+function prepareExecFn(scenarioName, host) {
+  const hostname = hosts[host];
+  const key = `${host}_${scenarioName}`;
   return () => {
     const res = http.get('http://'+hostname+'/app/'+scenarioName+'?count='+verticalScaleCount[scenarioName]);
     check(res, {
@@ -135,7 +148,7 @@ function prepareExecFn(scenarioName) {
         r.body.includes(scenarioName),
     });
     scenarioMetrics.forEach((metric) => {
-    	myTrend[scenarioName][metric].add(res.timings[metric], {tag: `${scenarioName}_${metric}`});
+    	myTrend[key][metric].add(res.timings[metric], {tag: `${scenarioName}_${metric}`});
     })
     sleep(1);  
   }
