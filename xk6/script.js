@@ -9,18 +9,18 @@ const maxVUs = 2000;
 const timeUnit = '1m';
 
 const scenarioStages = {
-/*/
+//
   'highmem' : [
     { duration: '1m', target:  800 },
     { duration: '3m', target:  800 },
     { duration: '30s', target:  800 }  
   ],
-/*/
+//
   'highcpu' : [
     { duration: '1m', target: 500 },
     { duration: '2m', target: 1000 },
-    { duration: '2m', target: 1200 },
-    { duration: '4m', target: 1200 },
+    { duration: '2m', target: 1500 },
+    { duration: '4m', target: 1500 },
   ],
 /*/
   'highmem1' : [
@@ -28,14 +28,14 @@ const scenarioStages = {
     { duration: '3m', target: 1500 },
     { duration: '30s', target: 1500 }  
   ],
-/*/
+//
   'highcpu1' : [
     { duration: '1m', target: 500 },
     { duration: '2m', target: 1000 },
-    { duration: '2m', target: 1200 },
-    { duration: '4m', target: 1200 },
+    { duration: '2m', target: 1500 },
+    { duration: '4m', target: 1500 },
   ],
-/*/	
+//	
   'highload' : [
     { duration: '1m', target: 10000 },
     { duration: '3m', target: 10000 },
@@ -142,7 +142,7 @@ function prepareExecFn(scenarioName, host) {
   const hostname = hosts[host];
   const key = `${host}_${scenarioName}`;
   return () => {
-    const res = http.get('http://'+hostname+'/app/'+scenarioName+'?count='+verticalScaleCount[scenarioName]);
+    const res = http.get('http://'+hostname+'/load-test/'+scenarioName+'?count='+verticalScaleCount[scenarioName]);
     check(res, {
       'verify homepage text': (r) =>
         r.body.includes(scenarioName),
