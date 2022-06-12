@@ -1,5 +1,13 @@
 #! /bin/bash
 
-kubectl apply -k default-setup
-kubectl apply -k anton-customize-base
-kubectl apply -k anton-split-highcpu
+if [ "$1" = "apply" ]; then
+    kubectl apply -k default-setup
+    kubectl apply -k anton-customize-base
+    kubectl apply -k anton-split-highcpu
+else
+    kubectl kustomize default-setup
+    kubectl kustomize anton-customize-base
+    kubectl kustomize anton-split-highcpu
+
+    echo "call './setup apply' to apply these changes."
+fi
