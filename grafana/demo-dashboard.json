@@ -25,10 +25,271 @@
     "fiscalYearStartMonth": 0,
     "graphTooltip": 1,
     "id": 28,
-    "iteration": 1655112295292,
+    "iteration": 1655112295932,
     "links": [],
-    "liveNow": false,
+    "liveNow": true,
     "panels": [
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "ms"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        },
+        "id": 8,
+        "interval": "1s",
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom"
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "editorMode": "code",
+            "expr": "k6_custom_anton_highcpu_duration_avg{}",
+            "hide": true,
+            "interval": "",
+            "legendFormat": "{{tag}}",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "editorMode": "code",
+            "expr": "k6_custom_anton_highmem_duration_avg{}",
+            "hide": true,
+            "legendFormat": "{{tag}}",
+            "range": true,
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "editorMode": "code",
+            "expr": "k6_custom_base_highcpu_duration_avg{}",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "{{tag}}",
+            "range": true,
+            "refId": "C"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "editorMode": "code",
+            "expr": "k6_custom_base_highmem_duration_avg{}",
+            "hide": false,
+            "legendFormat": "{{tag}}",
+            "range": true,
+            "refId": "D"
+          }
+        ],
+        "title": "Latency - Base",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "ms"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        },
+        "id": 9,
+        "interval": "1s",
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom"
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "editorMode": "code",
+            "expr": "k6_custom_anton_highcpu_duration_avg{}",
+            "interval": "",
+            "legendFormat": "{{tag}}",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "editorMode": "code",
+            "expr": "k6_custom_anton_highmem_duration_avg{}",
+            "hide": false,
+            "legendFormat": "{{tag}}",
+            "range": true,
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "editorMode": "code",
+            "expr": "k6_custom_base_highcpu_duration_avg{}",
+            "hide": true,
+            "interval": "",
+            "legendFormat": "{{tag}}",
+            "range": true,
+            "refId": "C"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "editorMode": "code",
+            "expr": "k6_custom_base_highmem_duration_avg{}",
+            "hide": true,
+            "legendFormat": "{{tag}}",
+            "range": true,
+            "refId": "D"
+          }
+        ],
+        "title": "Latency - Anton",
+        "type": "timeseries"
+      },
       {
         "datasource": {
           "type": "prometheus",
@@ -117,7 +378,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 0
+          "y": 8
         },
         "id": 2,
         "options": {
@@ -260,7 +521,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 0
+          "y": 8
         },
         "id": 3,
         "options": {
@@ -389,7 +650,7 @@
           "h": 8,
           "w": 12,
           "x": 0,
-          "y": 8
+          "y": 16
         },
         "id": 5,
         "options": {
@@ -519,7 +780,7 @@
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 8
+          "y": 16
         },
         "id": 6,
         "options": {
@@ -644,13 +905,13 @@
       ]
     },
     "time": {
-      "from": "now-15m",
+      "from": "now-10m",
       "to": "now"
     },
     "timepicker": {},
     "timezone": "",
     "title": "Anton Demo",
     "uid": "vN-hlAjnk",
-    "version": 19,
+    "version": 26,
     "weekStart": ""
   }
