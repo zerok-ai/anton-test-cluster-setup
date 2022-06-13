@@ -1,9 +1,10 @@
 bases:
   - ../anton-base
-patchesStrategicMerge:
-  - |-
-    apiVersion: networking.k8s.io/v1
-    kind: Ingress
-    metadata:
-      name: ing
-    $patch: delete
+
+# patchesStrategicMerge:
+#   - |-
+#     apiVersion: networking.k8s.io/v1
+#     kind: Ingress
+#     metadata:
+#       name: ing
+#     $patch: delete
