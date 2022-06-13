@@ -6,4 +6,4 @@ patchesJson6902:
       version: v1
       kind: Deployment
       name: dep
-    path: java-container-patch.yaml
+    path: node-container-patch.yaml

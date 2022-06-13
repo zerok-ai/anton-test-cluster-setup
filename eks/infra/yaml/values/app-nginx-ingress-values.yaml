@@ -11,6 +11,12 @@ controller:
       additionalLabels: {
         release: "prometheus"
       }
+  # Limit the scope of the controller to a specific namespace
+  scope:
+    # -- Enable 'scope' or not
+    enabled: true
+    # -- Namespace to limit the controller to; defaults to $(POD_NAMESPACE)
+    namespace: base
 
 defaultBackend:
   nodeSelector: {

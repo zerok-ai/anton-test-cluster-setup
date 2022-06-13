@@ -1,10 +1,16 @@
-- op: add
-  path: /spec/rules/0/http/paths/0
-  value: 
-    backend:
-      service:
-        name: svc-anton-highcpu
-        port:
-          number: 80
-    path: /load-test(/|$)(highcpu)
-    pathType: Prefix
+# - op: add
+#   path: /spec/rules/0/http/paths/0
+#   value: 
+#     backend:
+#       service:
+#         name: svc-app
+#         port:
+#           number: 80
+#     path: /load-test(/|$)(highcpu)
+#     pathType: Prefix
+- op: replace
+  path: /spec/rules/0/http/paths/0/path
+  value: /load-test(/|$)(highcpu)
+- op: replace
+  path: /spec/rules/0/http/paths/0/pathType
+  value: Exact

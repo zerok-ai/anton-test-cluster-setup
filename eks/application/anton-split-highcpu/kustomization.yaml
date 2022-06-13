@@ -1,5 +1,6 @@
 bases:
   - ../anton-split
+nameSuffix: -highcpu
 patchesJson6902:
   - target:
       group: networking.k8s.io
