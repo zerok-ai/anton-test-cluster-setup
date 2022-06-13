@@ -4,7 +4,7 @@ controller:
     enabled: true
     default: false
     controllerValue: "k8s.io/anton-ingress-nginx"  # default: k8s.io/ingress-nginx
-  replicaCount: 4
+  replicaCount: 1
   nodeSelector: {
     role: system,
     beta.kubernetes.io/os: linux

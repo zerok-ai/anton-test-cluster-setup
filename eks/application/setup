@@ -10,8 +10,11 @@ else
     # kubectl kustomize default-setup
     
     # app with 2 replicas in anton - default setup in ns:- anton
-    kubectl kustomize anton-customize-base
+    # echo "==============================="
+    # kubectl kustomize anton-customize-base
+    
     # app with 2 replicas in anton - default setup in ns:- anton
+    # echo "==============================="
     kubectl kustomize anton-split-highcpu
 
     echo 

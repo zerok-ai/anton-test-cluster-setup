@@ -1,6 +1,5 @@
 bases:
   - ../anton-split
-nameSuffix: -highcpu
 patchesJson6902:
   - target:
       group: networking.k8s.io
@@ -8,3 +7,8 @@ patchesJson6902:
       kind: Ingress
       name: ing
     path: ingress-patch.yaml
+  - target:
+      version: v1
+      kind: Service
+      name: svc
+    path: service-patch.yaml
