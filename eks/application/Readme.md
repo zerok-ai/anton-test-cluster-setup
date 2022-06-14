@@ -1,41 +1,26 @@
-# Install application
+# Install
 
-### 1. Apply namespace, deployment and services
-```
-kubectl apply -f node-deployment.yaml
-kubectl apply -f services.yaml
-```
-### 2. Get the Ingress Controller's public IP address
+## Install application
+
+Run the following command from the application folder to install the applications.
 
 ```
-kubectl get services --namespace ingress | grep 'app-ingress-ingress' | grep -v 'admission' | awk '{print $4}'
+./setup apply
 ```
 
-### 3. Configure app-ingress.yaml
-
-Open app-ingress.yaml and put the IP printed in the previous step against the `- host:` entry
+## Check yaml files
+If you want to just check the yaml files which will get deployed, run the following:
 
 ```
-open app-ingress.yaml
+./setup
 ```
 
-### 4. Apply ingress object
-```
-kubectl apply -f app-ingress.yaml
-```
+# Structure of kustomize folders
 
-## Labeling the pods
-
-### Check the labels of the pods
 ```
-kubectl get pods --namespace app --show-labels
+base
+├── default-setup
+│   └── anton-base-customized
+└── anton-split
+    └── anton-high-cpu
 ```
-
-### Label all the pods of the app
-```
-kubectl label pods --namespace app --selector=app=load-test load=high
-```
-
-### Set label to a pod
-kubectl label pods --namespace app <name of the pod> load=low --overwrite=true
-
