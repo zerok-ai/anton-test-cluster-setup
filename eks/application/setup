@@ -7,11 +7,11 @@ if [ "$1" = "apply" ]; then
 else
     
     # app with 4 replicas in ns:- base
-    # kubectl kustomize default-setup
+    kubectl kustomize default-setup
     
     # app with 2 replicas in anton - default setup in ns:- anton
     # echo "==============================="
-    # kubectl kustomize anton-customize-base
+    kubectl kustomize anton-customize-base
     
     # app with 2 replicas in anton - default setup in ns:- anton
     # echo "==============================="

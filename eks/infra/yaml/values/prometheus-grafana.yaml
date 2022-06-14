@@ -1,5 +1,7 @@
 prometheus:
   prometheusSpec:
+    scrapeInterval: 5s
+    evaluationInterval: 5s
     podMonitorSelectorNilUsesHelmValues: false
     serviceMonitorSelectorNilUsesHelmValues: false
     serviceMonitorSelector: {}
