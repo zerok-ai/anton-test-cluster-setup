@@ -20,7 +20,7 @@ If you want to just check the yaml files which will get deployed, run the follow
 ```
 base
 ├── default-setup
-│   └── anton-base-customized
+│   └── anton-customize-base
 └── anton-split
     └── anton-high-cpu
 ```
