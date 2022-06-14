@@ -1,0 +1,15 @@
+- op: replace
+  path: /metadata/name
+  value: dep-anton-highcpu
+- op: replace
+  path: /spec/replicas
+  value: 2
+- op: replace
+  path: /spec/template/spec/containers/0/resources
+  value: 
+    requests: 
+      cpu: 145m
+      memory: 150Mi
+    limits:
+      cpu: 165m
+      memory: 180Mi 

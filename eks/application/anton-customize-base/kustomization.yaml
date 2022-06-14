@@ -7,7 +7,7 @@ patchesJson6902:
       version: v1
       kind: Deployment
       name: dep
-    path: replica-count.yaml
+    path: deployment-patch.yaml
 patchesStrategicMerge:
   - |-
     apiVersion: monitoring.coreos.com/v1
