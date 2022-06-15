@@ -18,9 +18,14 @@ alertmanager:
     }
 
 grafana:
+  adminPassword: grafanaAdminPassword
   sidecar:
     datasources:
       defaultDatasourceEnabled: true
+    dashboards:
+      searchNamespace: ALL
+      provider:
+        allowUiUpdates: true
 
 prometheusOperator:
   alertmanagerSpec: 
