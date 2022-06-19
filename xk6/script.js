@@ -11,16 +11,17 @@ const timeUnit = '1m';
 const scenarioStages = {
 //
   'highmem' : [
-    { duration: '1m', target:  800 },
-    { duration: '3m', target:  800 },
-    { duration: '30s', target:  800 }  
+    { duration: '1m', target:  500 },
+    { duration: '1m', target: 1000 },
+    { duration: '1m', target: 1500 },
+    { duration: '2m', target: 1500 }  
   ],
 //
   'highcpu' : [
-    { duration: '1m', target: 500 },
-    { duration: '2m', target: 1000 },
+    { duration: '1m', target:  500 },
+    { duration: '1m', target: 1000 },
+    { duration: '1m', target: 1500 },
     { duration: '2m', target: 1500 },
-    { duration: '4m', target: 1500 },
   ],
 /*/
   'highmem1' : [
@@ -81,10 +82,10 @@ const scenarioMetrics = ['waiting', 'duration']
 
 var myTrend = {};
 const hostname_anton = __ENV.ANTON_HOSTNAME || 'with.getanton.com';
-const hostname_default = __ENV.DEFAULT_HOSTNAME || 'without.getanton.com';
+const hostname_base  = __ENV.BASE_HOSTNAME || 'without.getanton.com';
 const hosts = {
   anton: hostname_anton,
-  default: hostname_default
+  base: hostname_base
 };
 
 function generateScenarioObj(scenarioName, hostname) {
