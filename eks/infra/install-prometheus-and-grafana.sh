@@ -14,8 +14,14 @@ helm upgrade --install prom prometheus-community/kube-prometheus-stack \
 	--namespace monitoring \
 	--values ./yaml/values/prometheus-grafana.yaml
 
+kubectl apply -f ./yaml/cluster/monitoring-ingress.yaml
+
+./install-grafana-dashboard.sh anton-demo
+./install-grafana-dashboard.sh loadtest-data
+
 # install Promtail
 # helm upgrade --install promtail grafana/promtail -f ./yaml/values/promtail-values.yaml -n monitoring
 
 # install Loki 
 # helm upgrade --install loki grafana/loki-distributed -n monitoring
+

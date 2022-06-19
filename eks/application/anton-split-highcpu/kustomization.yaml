@@ -7,3 +7,14 @@ patchesJson6902:
       kind: Ingress
       name: ing
     path: ingress-patch.yaml
+  - target:
+      version: v1
+      kind: Service
+      name: svc
+    path: service-patch.yaml
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: dep
+    path: deployment-patch.yaml

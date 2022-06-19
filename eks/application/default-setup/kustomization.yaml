@@ -1,7 +1,5 @@
 bases:
-  - ../language
-resources:
-  - ingress-nginx.yaml
+  - ../base
 nameSuffix: -app
 namespace: base
 commonLabels:

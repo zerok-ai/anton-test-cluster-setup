@@ -1,6 +1,6 @@
 - op: add
   path: /spec/rules/0/http/paths/0
-  value: 
+  value:
     backend:
       service:
         name: svc-anton-highcpu

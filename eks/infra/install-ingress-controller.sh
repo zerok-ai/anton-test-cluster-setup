@@ -5,19 +5,14 @@ echo '---------------------- Updating helm repo for ingress-nginx'
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm repo update
 
-# Create namespace
-echo '---------------------- Creating namespace `ingress`'
-kubectl create namespace ingress
-
 # Install the Helm (v3) chart for nginx ingress controller
 echo '---------------------- Installing helm chart of ingress-nginx'
 helm upgrade --install app-ingress ingress-nginx/ingress-nginx \
-	--namespace ingress \
-	--values ./yaml/values/nginx-ingress-values.yaml
+	--create-namespace --namespace app-ingress \
+	--values ./yaml/values/app-nginx-ingress-values.yaml
 
 # Print the Ingress Controller public IP address
-kubectl get services --namespace ingress
-
+kubectl get services --namespace app-ingress
 #----------- 
 # helm upgrade app-ingress ingress-nginx/ingress-nginx \
 # 	--namespace ingress \

@@ -14,7 +14,7 @@ spec:
       paths:
       - backend:
           service:
-            name: svc
+            name: svc-app
             port: 
               number: 80
         path: /load-test(/|$)(.*)

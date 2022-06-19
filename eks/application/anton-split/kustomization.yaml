@@ -1,14 +1,9 @@
 bases:
-  - ../anton-base
+  - ../base
+namespace: anton
 commonLabels:
   dep: anton
 patchesJson6902:
-  - target:
-      group: apps
-      version: v1
-      kind: Deployment
-      name: dep
-    path: deployment-patch.yaml
   - target:
       group: autoscaling
       version: v1
@@ -16,27 +11,15 @@ patchesJson6902:
       name: hpa
     path: hpa-patch.yaml
   - target:
-      version: v1
-      kind: Service
-      name: svc
-    path: service-patch.yaml
-  - target:
       group: networking.k8s.io
       version: v1
       kind: Ingress
       name: ing
     path: ingress-patch.yaml
-  # - target:
-  #     group: monitoring.coreos.com
-  #     version: v1
-  #     kind: ServiceMonitor
-  #     name: svcm
-  #   path: service-monitor-patch.yaml
-# patchesStrategicMerge:
-#   - |-
-#     apiVersion: networking.k8s.io/v1
-#     kind: Ingress
-#     metadata:
-#       name: ing
-#     $patch: delete
-  
+patchesStrategicMerge:
+  - |-
+    apiVersion: monitoring.coreos.com/v1
+    kind: ServiceMonitor
+    metadata:
+      name: svcm
+    $patch: delete

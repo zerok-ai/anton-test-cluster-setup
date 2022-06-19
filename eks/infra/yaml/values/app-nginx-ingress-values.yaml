@@ -1,5 +1,5 @@
 controller:
-  replicaCount: 4
+  replicaCount: 1
   nodeSelector: {
     role: system,
     beta.kubernetes.io/os: linux
@@ -11,7 +11,6 @@ controller:
       additionalLabels: {
         release: "prometheus"
       }
-
 defaultBackend:
   nodeSelector: {
     role: system,
