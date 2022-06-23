@@ -24,8 +24,8 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
-  "id": 25,
-  "iteration": 1655721667767,
+  "id": 26,
+  "iteration": 1655969015729,
   "links": [],
   "liveNow": true,
   "panels": [
@@ -55,7 +55,7 @@
       },
       "id": 15,
       "options": {
-        "content": "\n<br>\n<a \nhref=\"http://load-test.getanton.com/\"  \ntarget=\"_blank\"\nstyle=\"\n  border-radius: 7px; \n  margin: 0.25rem; \n  border: 1px solid;\n  text-decoration: none; \n  padding: 1rem 1.5rem; \n  width: 100px;\n  line-height: 10px;\n  font-size: 36px;\n  text-align: center;\">\n▶️</a>\n\n<a \nhref=\"http://load-test.getanton.com/status\"  \ntarget=\"_blank\"\nstyle=\"\nborder-radius: 7px; \nmargin: 0.25rem 0.30rem; \nborder: 1px solid;\ntext-decoration: none; \npadding: 1rem 1.5rem; \nwidth: 100px;\nline-height: 100px;\nfont-size: 36px;\ntext-align: center\">\n🪵</a>\n",
+        "content": "\n<br>\n<a \nhref=\"http://load-test.getanton.com/start\"  \ntarget=\"_blank\"\nstyle=\"\n  border-radius: 7px; \n  margin: 0.25rem; \n  border: 1px solid;\n  text-decoration: none; \n  padding: 1rem 1.5rem; \n  width: 100px;\n  line-height: 10px;\n  font-size: 36px;\n  text-align: center;\"\ntitle=\"Run test\">\n▶️</a>\n\n<a \nhref=\"http://load-test.getanton.com/status\"  \ntarget=\"_blank\"\nstyle=\"\nborder-radius: 7px; \nmargin: 0.25rem 0.30rem; \nborder: 1px solid;\ntext-decoration: none; \npadding: 1rem 1.5rem; \nwidth: 100px;\nline-height: 100px;\nfont-size: 36px;\ntext-align: center\"\ntitle=\"Logs\">\n🪵</a>\n\n<a \nhref=\"http://load-test.getanton.com/prom\"  \ntarget=\"_blank\"\nstyle=\"\nborder-radius: 7px; \nmargin: 0.25rem 0.30rem; \nborder: 1px solid;\ntext-decoration: none; \npadding: 1rem 1.5rem; \nwidth: 100px;\nline-height: 100px;\nfont-size: 36px;\ntext-align: center\"\ntitle=\"Setup prometheus port-forwarding\">\n🔥</a>\n",
         "mode": "html"
       },
       "pluginVersion": "8.5.3",
@@ -802,8 +802,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -867,8 +866,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -935,8 +933,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -1003,8 +1000,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -1073,8 +1069,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -1144,8 +1139,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -1215,8 +1209,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -2191,6 +2184,6 @@
   "timezone": "",
   "title": "Anton Demo",
   "uid": "vN-hlAjnk",
-  "version": 20,
+  "version": 3,
   "weekStart": ""
 }

@@ -1,5 +1,7 @@
 dashboardName=$1
 
+kubectl delete configmap ${dashboardName} --namespace monitoring 
+
 kubectl create configmap ${dashboardName} \
     --namespace monitoring \
 	--from-file ../../grafana/${dashboardName}.json \
