@@ -4,8 +4,8 @@ import { sleep } from 'k6';
 import { Counter, Trend } from 'k6/metrics';
 
 /* scenario specs */
-const preallocVUs = 1000;
-const maxVUs = 1200;
+const preallocVUs = 2000;
+const maxVUs = 2000;
 const timeUnit = '1m';
 
 const scenarioStages = {

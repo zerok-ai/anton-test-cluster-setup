@@ -1,11 +1,12 @@
 const express = require('express')
+const pkill = require('pkill');
 const fs = require('fs');
 const app = express()
 const port = 3000
 
 const execute = require('child_process').exec
 var running = false;
-app.get('/', (req, res) => {
+app.get('/start', (req, res) => {
     if(running) {
         status((data) => res.send(data.toString()));
         return;
@@ -19,6 +20,12 @@ app.get('/', (req, res) => {
         res.send(error);
         return;
     }
+})
+
+app.get('/reset', (req, res) => {
+    running = false;
+    pkill.full('k6');
+    res.send("Reset done");
 })
 
 app.get('/status', (req, res) => {
