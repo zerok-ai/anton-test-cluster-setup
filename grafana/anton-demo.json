@@ -24,8 +24,8 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
-  "id": 25,
-  "iteration": 1656597105231,
+  "id": 21,
+  "iteration": 1657107799835,
   "links": [],
   "liveNow": true,
   "panels": [
@@ -63,12 +63,78 @@
       "type": "text"
     },
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "description": "",
+      "gridPos": {
+        "h": 4,
+        "w": 12,
+        "x": 0,
+        "y": 4
+      },
+      "id": 24,
+      "interval": "1m",
+      "links": [],
+      "options": {
+        "content": "\n| Pod         | Count | CPU (m) | Memory (MI) | GC threads | Req. per pod |\n|-------------|-------|---------|-------------|------------|--------------|\n| All         | `4`   | `170`   | `200`       | `1`        | `1500`/min   |\n",
+        "mode": "markdown"
+      },
+      "pluginVersion": "8.5.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "",
+          "refId": "A"
+        }
+      ],
+      "title": "Config values",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "description": "",
+      "gridPos": {
+        "h": 4,
+        "w": 12,
+        "x": 12,
+        "y": 4
+      },
+      "id": 46,
+      "interval": "1m",
+      "links": [],
+      "options": {
+        "content": "| Pod         | Count | CPU (m) | Memory (MI) | GC threads | Req. per pod |\n|-------------|-------|---------|-------------|------------|--------------|\n| High Memory | `2`   | `175`   | `220`       | `1`        | `1500`/min   |\n| Rest        | `2`   | `165`   | `180`       | `3`        | `1500`/min   |\n",
+        "mode": "markdown"
+      },
+      "pluginVersion": "8.5.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "",
+          "refId": "A"
+        }
+      ],
+      "title": "Config values",
+      "type": "text"
+    },
+    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 4
+        "y": 8
       },
       "id": 17,
       "panels": [],
@@ -136,7 +202,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 5
+        "y": 9
       },
       "id": 20,
       "options": {
@@ -240,7 +306,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 5
+        "y": 9
       },
       "id": 19,
       "options": {
@@ -288,7 +354,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 13
+        "y": 17
       },
       "id": 34,
       "panels": [],
@@ -324,7 +390,7 @@
         "h": 3,
         "w": 6,
         "x": 0,
-        "y": 14
+        "y": 18
       },
       "id": 22,
       "interval": "1m",
@@ -389,9 +455,9 @@
         "h": 3,
         "w": 6,
         "x": 6,
-        "y": 14
+        "y": 18
       },
-      "id": 24,
+      "id": 45,
       "interval": "1m",
       "links": [],
       "options": {
@@ -415,14 +481,14 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate{namespace=\"$namespace1\"}) / sum(kube_pod_container_resource_limits{job=\"kube-state-metrics\", namespace=\"$namespace1\", resource=\"cpu\"})",
+          "expr": "sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate{namespace=\"$namespace1\"}) / sum(kube_pod_container_resource_requests{job=\"kube-state-metrics\", namespace=\"$namespace1\", resource=\"cpu\"})",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 2,
           "refId": "A"
         }
       ],
-      "title": "CPU Utilisation (from limits)",
+      "title": "CPU Utilisation (from requests)",
       "type": "stat"
     },
     {
@@ -457,7 +523,7 @@
         "h": 3,
         "w": 6,
         "x": 12,
-        "y": 14
+        "y": 18
       },
       "id": 25,
       "interval": "1m",
@@ -525,7 +591,7 @@
         "h": 3,
         "w": 6,
         "x": 18,
-        "y": 14
+        "y": 18
       },
       "id": 26,
       "interval": "1m",
@@ -595,7 +661,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 17
+        "y": 21
       },
       "id": 36,
       "interval": "1s",
@@ -668,79 +734,6 @@
         "h": 4,
         "w": 12,
         "x": 12,
-        "y": 17
-      },
-      "id": 37,
-      "interval": "1s",
-      "links": [],
-      "options": {
-        "displayMode": "lcd",
-        "minVizHeight": 10,
-        "minVizWidth": 0,
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true
-      },
-      "pluginVersion": "8.5.3",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "(sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate{ namespace=\"$namespace2\", pod=~\"dep-anton-highcpu.*\"}) by (pod) / sum(cluster:namespace:pod_cpu:active:kube_pod_container_resource_limits{ namespace=\"$namespace2\", pod=~\"dep-anton-highcpu.*\"}) by (pod)) * 100  ",
-          "format": "time_series",
-          "intervalFactor": 2,
-          "legendFormat": "  ",
-          "range": true,
-          "refId": "A",
-          "step": 10
-        }
-      ],
-      "title": "CPU Usage per Pod - $namespace2 - highCPU",
-      "type": "bargauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 2,
-          "mappings": [],
-          "max": 100,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 12,
-        "x": 12,
         "y": 21
       },
       "id": 38,
@@ -777,7 +770,80 @@
           "step": 10
         }
       ],
-      "title": "CPU Usage per Pod - $namespace2 - Others",
+      "title": "CPU Usage per Pod - $namespace2 - highmem",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 12,
+        "x": 12,
+        "y": 25
+      },
+      "id": 37,
+      "interval": "1s",
+      "links": [],
+      "options": {
+        "displayMode": "lcd",
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true
+      },
+      "pluginVersion": "8.5.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "(sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate{ namespace=\"$namespace2\", pod=~\"dep-anton-highcpu.*\"}) by (pod) / sum(cluster:namespace:pod_cpu:active:kube_pod_container_resource_limits{ namespace=\"$namespace2\", pod=~\"dep-anton-highcpu.*\"}) by (pod)) * 100  ",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "legendFormat": "  ",
+          "range": true,
+          "refId": "A",
+          "step": 10
+        }
+      ],
+      "title": "CPU Usage per Pod - $namespace2 - others",
       "type": "bargauge"
     },
     {
@@ -786,7 +852,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 25
+        "y": 29
       },
       "id": 44,
       "panels": [
@@ -818,7 +884,7 @@
             "h": 3,
             "w": 6,
             "x": 0,
-            "y": 26
+            "y": 30
           },
           "id": 28,
           "interval": "1m",
@@ -882,7 +948,7 @@
             "h": 3,
             "w": 6,
             "x": 6,
-            "y": 26
+            "y": 30
           },
           "id": 31,
           "interval": "1m",
@@ -949,7 +1015,7 @@
             "h": 3,
             "w": 6,
             "x": 12,
-            "y": 26
+            "y": 30
           },
           "id": 29,
           "interval": "1m",
@@ -1016,7 +1082,7 @@
             "h": 3,
             "w": 6,
             "x": 18,
-            "y": 26
+            "y": 30
           },
           "id": 32,
           "interval": "1m",
@@ -1085,7 +1151,7 @@
             "h": 6,
             "w": 12,
             "x": 0,
-            "y": 29
+            "y": 33
           },
           "id": 40,
           "interval": "1m",
@@ -1155,7 +1221,7 @@
             "h": 6,
             "w": 6,
             "x": 12,
-            "y": 29
+            "y": 33
           },
           "id": 41,
           "interval": "1m",
@@ -1225,7 +1291,7 @@
             "h": 6,
             "w": 6,
             "x": 18,
-            "y": 29
+            "y": 33
           },
           "id": 42,
           "interval": "1m",
@@ -1272,7 +1338,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 26
+        "y": 30
       },
       "id": 11,
       "panels": [],
@@ -1341,7 +1407,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 27
+        "y": 31
       },
       "id": 8,
       "interval": "1s",
@@ -1473,7 +1539,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 27
+        "y": 31
       },
       "id": 9,
       "interval": "1s",
@@ -1632,7 +1698,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 35
+        "y": 39
       },
       "id": 2,
       "interval": "10s",
@@ -1777,7 +1843,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 35
+        "y": 39
       },
       "id": 3,
       "interval": "10s",
@@ -1908,7 +1974,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 43
+        "y": 47
       },
       "id": 5,
       "options": {
@@ -2039,7 +2105,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 43
+        "y": 47
       },
       "id": 6,
       "options": {
@@ -2184,6 +2250,6 @@
   "timezone": "",
   "title": "Anton Demo",
   "uid": "vN-hlAjnk",
-  "version": 4,
+  "version": 6,
   "weekStart": ""
 }
