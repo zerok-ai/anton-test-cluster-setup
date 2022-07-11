@@ -9,7 +9,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   rules:
-  - host: without.getanton.com
+  - host: without.zerok.ai
     http:
       paths:
       - backend:

@@ -12,7 +12,7 @@ metadata:
 spec:
   rules:
     # change the IP address here
-  - host: without.getanton.com
+  - host: without.zerok.ai
     http:
       paths:
       - backend:

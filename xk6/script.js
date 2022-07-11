@@ -81,8 +81,8 @@ const scenarioMetrics = ['waiting', 'duration']
 // }
 
 var myTrend = {};
-const hostname_anton = __ENV.ANTON_HOSTNAME || 'with.getanton.com';
-const hostname_base  = __ENV.BASE_HOSTNAME || 'without.getanton.com';
+const hostname_anton = __ENV.ANTON_HOSTNAME || 'with.zerok.ai';
+const hostname_base  = __ENV.BASE_HOSTNAME || 'without.zerok.ai';
 const hosts = {
   anton: hostname_anton,
   base: hostname_base

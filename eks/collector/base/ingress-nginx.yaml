@@ -8,7 +8,7 @@ metadata:
     nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   rules:
-  - host: isolation.getanton.com
+  - host: isolation.zerok.ai
     http:
       paths:
       - backend:

@@ -3,4 +3,4 @@
   value: ing-anton
 - op: replace
   path: /spec/rules/0/host
-  value: with.getanton.com
+  value: with.zerok.ai
