@@ -1,8 +1,8 @@
 bases:
   - ../base
-namespace: anton
+namespace: zerok
 commonLabels:
-  dep: anton
+  dep: zerok
 patchesJson6902:
   - target:
       group: autoscaling

@@ -1,6 +1,6 @@
 bases:
   - ../default-setup
-namespace: anton
+namespace: zerok
 patchesJson6902:
   - target:
       group: apps

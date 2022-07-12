@@ -1,6 +1,6 @@
 - op: replace
   path: /metadata/name
-  value: hpa-anton
+  value: hpa-zerok
 - op: replace
   path: /spec/scaleTargetRef/name
-  value: dep-anton
+  value: dep-zerok

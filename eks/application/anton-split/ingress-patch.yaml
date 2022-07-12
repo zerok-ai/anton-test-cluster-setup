@@ -1,6 +1,6 @@
 - op: replace
   path: /metadata/name
-  value: ing-anton
+  value: ing-zerok
 - op: replace
   path: /spec/rules/0/host
   value: with.zerok.ai

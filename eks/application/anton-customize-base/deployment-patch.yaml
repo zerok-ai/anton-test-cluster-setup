@@ -1,6 +1,6 @@
 - op: replace
   path: /metadata/name
-  value: dep-anton-rest
+  value: dep-zerok-rest
 - op: replace
   path: /spec/replicas
   value: 2

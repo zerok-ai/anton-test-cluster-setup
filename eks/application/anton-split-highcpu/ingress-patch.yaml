@@ -3,7 +3,7 @@
   value:
     backend:
       service:
-        name: svc-anton-highcpu
+        name: svc-zerok-highcpu
         port:
           number: 80
     path: /load-test(/|$)(highcpu)

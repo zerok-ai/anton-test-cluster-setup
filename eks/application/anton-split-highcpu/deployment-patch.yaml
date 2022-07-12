@@ -1,6 +1,6 @@
 - op: replace
   path: /metadata/name
-  value: dep-anton-highcpu
+  value: dep-zerok-highcpu
 - op: replace
   path: /spec/replicas
   value: 2
