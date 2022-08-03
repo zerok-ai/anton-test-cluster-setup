@@ -9,7 +9,7 @@ helm repo update
 echo '---------------------- Installing helm chart of ingress-nginx'
 helm upgrade --install app-ingress ingress-nginx/ingress-nginx \
 	--create-namespace --namespace app-ingress \
-	--values ./yaml/values/app-nginx-ingress-values.yaml
+	--values $setupfolder/common/yaml/values/app-nginx-ingress-values.yaml
 
 # Print the Ingress Controller public IP address
 kubectl get services --namespace app-ingress

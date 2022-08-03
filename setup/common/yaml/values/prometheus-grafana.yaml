@@ -18,7 +18,6 @@ alertmanager:
     }
 
 grafana:
-  adminPassword: grafanaAdminPassword
   sidecar:
     datasources:
       defaultDatasourceEnabled: true

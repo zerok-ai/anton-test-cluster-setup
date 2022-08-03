@@ -12,15 +12,15 @@ kubectl create namespace monitoring
 echo '---------------------- Installing kube-prometheus-stack'
 helm upgrade --install prom prometheus-community/kube-prometheus-stack \
 	--namespace monitoring \
-	--values ./yaml/values/prometheus-grafana.yaml
+	--values $setupfolder/common/yaml/values/prometheus-grafana.yaml
 
-kubectl apply -f ./yaml/cluster/monitoring-ingress.yaml
+kubectl apply -f $setupfolder/common/yaml/cluster/monitoring-ingress.yaml
 
-./install-grafana-dashboard.sh anton-demo
-./install-grafana-dashboard.sh loadtest-data
+$setupfolder/common/install-grafana-dashboard.sh anton-demo
+$setupfolder/common/install-grafana-dashboard.sh loadtest-data
 
 # install Promtail
-# helm upgrade --install promtail grafana/promtail -f ./yaml/values/promtail-values.yaml -n monitoring
+# helm upgrade --install promtail grafana/promtail -f $setupfolder/common/yaml/values/promtail-values.yaml -n monitoring
 
 # install Loki 
 # helm upgrade --install loki grafana/loki-distributed -n monitoring
