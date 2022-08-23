@@ -22,6 +22,10 @@ else
         
         # install commons
         sh $setupfolder/common/install.sh
+
+        # install loadtest
+        kubectl apply -k load-test
+        
     else
         helpFunction
     fi

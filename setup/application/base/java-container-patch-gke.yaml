@@ -8,10 +8,10 @@
     - key: "dedicated"
       operator: "Equal"
       value: "worker"
-      effect: "NoSchedule" 
+      effect: "NoSchedule"
     containers:
       - name: load-test
-        image: us-central1-docker.pkg.dev/black-scope-358204/zerok-demo-cluster/nodeexample:latest
+        image: us-central1-docker.pkg.dev/black-scope-358204/zerok-demo-cluster/javaexample:latest
         imagePullPolicy: Always
         ports:
         - name: m-http
@@ -19,7 +19,7 @@
         resources: 
           requests: 
             cpu: 150m
-            memory: 170Mi
+            memory: 340Mi
           limits:
             cpu: 170m
-            memory: 200Mi 
+            memory: 400Mi 
