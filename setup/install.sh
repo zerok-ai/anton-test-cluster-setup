@@ -23,9 +23,13 @@ else
         # install commons
         sh $setupfolder/common/install.sh
 
+        # install services
+        cd $setupfolder/application
+        ./setup.sh apply
+        cd $setupfolder
+        
         # install loadtest
         kubectl apply -k load-test
-        
     else
         helpFunction
     fi

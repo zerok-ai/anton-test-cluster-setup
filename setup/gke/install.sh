@@ -24,7 +24,8 @@ echo '---------------------- Updating default-pool'
 gcloud container node-pools update default-pool \
     --node-labels "role=system" \
     --zone "us-central1-c" \
-    --cluster "zerok-demo-cluster"
+    --cluster "zerok-demo-cluster" \
+    --quiet
 
 echo ''
 echo '---------------------- Enabling autoscaling on default-pool'
@@ -41,7 +42,8 @@ gcloud container node-pools create "worker" \
     --enable-autoscaling --min-nodes "0" --max-nodes "4" \
     --node-labels "role=worker" \
     --node-taints "dedicated=worker:NoSchedule" \
-    --cluster "zerok-demo-cluster" --zone "us-central1-c"   
+    --cluster "zerok-demo-cluster" --zone "us-central1-c" 
+
 
 echo ''
 echo '---------------------- Creating xk6 cluster'

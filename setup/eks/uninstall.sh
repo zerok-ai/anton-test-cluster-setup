@@ -1,1 +1,1 @@
-eksctl delete cluster -f ./yaml/cluster/clusterconfig.yaml
+eksctl delete cluster -f $setupfolder/eks/clusterconfig.yaml
