@@ -11,4 +11,4 @@ patchesJson6902:
       version: v1
       kind: Deployment
       name: dep
-    path: node-container-patch.yaml
+    path: node-container-patch-gke.yaml

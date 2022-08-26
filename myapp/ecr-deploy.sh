@@ -9,9 +9,9 @@ docker build -t $ECR_Repo_Name .
 
 docker tag $ECR_Repo_Name $ECR_Repo_URI
 
-# aws ecr get-login-password \
-# 	--region $ECR_Region | docker login \
-# 	--username AWS \
-# 	--password-stdin $ECR_URI
+aws ecr get-login-password \
+	--region $ECR_Region | docker login \
+	--username AWS \
+	--password-stdin $ECR_URI
 
-# docker push $ECR_Repo_URI
+docker push $ECR_Repo_URI

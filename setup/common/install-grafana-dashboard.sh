@@ -4,7 +4,7 @@ kubectl delete configmap ${dashboardName} --namespace monitoring
 
 kubectl create configmap ${dashboardName} \
     --namespace monitoring \
-	--from-file ../../grafana/${dashboardName}.json \
+	--from-file $setupfolder/../grafana/${dashboardName}.json \
     -o yaml --dry-run=client | kubectl apply -f -
 
 kubectl label --overwrite --namespace monitoring configmap \

@@ -14,14 +14,14 @@ const scenarioStages = {
     { duration: '1m', target:  500 },
     { duration: '1m', target: 1000 },
     { duration: '1m', target: 1500 },
-    { duration: '2m', target: 1500 }  
+    { duration: '2m', target: 1800 }  
   ],
 //
   'highcpu' : [
     { duration: '1m', target:  500 },
     { duration: '1m', target: 1000 },
     { duration: '1m', target: 1500 },
-    { duration: '2m', target: 1500 },
+    { duration: '2m', target: 1800 },
   ],
 /*/
   'highmem1' : [

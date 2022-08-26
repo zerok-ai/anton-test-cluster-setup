@@ -21,4 +21,4 @@ else
     echo
     echo "👉 call './setup apply' to apply these changes."
     echo 
-fi
+fi  

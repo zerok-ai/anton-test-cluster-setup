@@ -16,7 +16,3 @@ spec:
       labels:
         app: myapp
         dep: default
-    spec:
-      nodeSelector: {
-        role: worker
-      }

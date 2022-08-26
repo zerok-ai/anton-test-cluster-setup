@@ -14,7 +14,7 @@ echo '---------------------- Installing helm chart of haproxy-ingress'
 helm install app-ingress haproxy-ingress/haproxy-ingress\
   --namespace ingress-haproxy\
   --version 0.13.7\
-  -f ./yaml/values/haproxy-ingress-values.yaml
+  -f $setupfolder/common/yaml/values/haproxy-ingress-values.yaml
 
 # Print the Ingress Controller public IP address
 kubectl get services --namespace ingress-haproxy
@@ -22,4 +22,4 @@ kubectl get services --namespace ingress-haproxy
 #----------- 
 # helm upgrade app-ingress haproxy-ingress/haproxy-ingress \
 # 	--namespace ingress-haproxy \
-# 	-f ./yaml/values/haproxy-ingress-values.yaml
+# 	-f $setupfolder/common/yaml/values/haproxy-ingress-values.yaml
