@@ -24,7 +24,6 @@ fi
 
 #create cluster
 echo '---------------------- Creating cluster'
-exit 1
 
 gcloud beta container \
     --project "$project" clusters create "zerok-demo-cluster" \
